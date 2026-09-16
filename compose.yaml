@@ -1,0 +1,14 @@
+services:
+  app:
+    build: .
+    ports:
+      - "8000:8000"
+    environment:
+      - APP_DB_PATH=/data/cues.db
+      - APP_PORT=8000
+    volumes:
+      - cues-data:/data
+    restart: unless-stopped
+
+volumes:
+  cues-data:

@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>舞台排演提示单</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header>
+    <h1>🎭 舞台排演提示单</h1>
+    <div class="toolbar">
+      <button id="btn-add" class="primary">＋ 新增提示</button>
+      <div class="zoom-controls">
+        <button id="zoom-out" title="缩小">−</button>
+        <span id="zoom-label"></span>
+        <button id="zoom-in" title="放大">＋</button>
+        <button id="zoom-fit">适应宽度</button>
+      </div>
+      <div class="filter">
+        <button id="filter-toggle">部门筛选 ▾</button>
+        <div id="filter-panel" class="filter-panel hidden"></div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <div id="timeline-scroll">
+      <div id="timeline-inner">
+        <div id="ruler" class="row"></div>
+        <div id="lanes"></div>
+      </div>
+    </div>
+    <aside id="detail" class="hidden"></aside>
+  </main>
+
+  <div id="modal" class="modal-backdrop hidden">
+    <div class="modal">
+      <h2 id="modal-title">新增提示</h2>
+      <form id="cue-form">
+        <label>部门
+          <input name="department" list="dept-list" required maxlength="100" placeholder="如：灯光 / 音响 / 舞台">
+          <datalist id="dept-list"></datalist>
+        </label>
+        <label>名称
+          <input name="name" required maxlength="200" placeholder="如：开场灯亮">
+        </label>
+        <label>时长（秒，或 mm:ss）
+          <input name="duration" required placeholder="如 90 或 1:30">
+        </label>
+        <label>锁定开场秒数（留空为自动排算）
+          <input name="locked_start" placeholder="如 0 或 2:00">
+        </label>
+        <fieldset>
+          <legend>前置依赖</legend>
+          <ul id="dep-list"></ul>
+          <div class="dep-add">
+            <select id="dep-cue"></select>
+            <input id="dep-delay" placeholder="延迟(秒)" size="9">
+            <button type="button" id="dep-add-btn">添加依赖</button>
+          </div>
+        </fieldset>
+        <div class="modal-actions">
+          <button type="button" id="modal-cancel">取消</button>
+          <button type="submit" class="primary">保存</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <div id="toast" class="hidden"></div>
+  <script src="app.js"></script>
+</body>
+</html>
